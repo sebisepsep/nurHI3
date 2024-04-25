@@ -56,7 +56,6 @@ for j in range(5):
     n_glob = np.array([],dtype=object)
     gamma = np.array([])
     lam_track = np.array([])
-    maxi = 0.01
     i = 0
     while True:
         x_glob, y_glob, z_glob = initial[0],initial[1],initial[2]
@@ -88,12 +87,7 @@ for j in range(5):
 
         #now do line minimization to find lambda for new x point via golden ratio search
         mini = 0 #because of graddient I would guess itstarts at zero!
-        if i>2:
-            lam_min_nacher = lam_track[i-1]
-            lam_min_vorher = lam_track[i-2]
-
-            if lam_min_vorher == lam_min_nacher:
-                maxi = maxi/2
+        maxi = 10**-1
         
     
         mid = mini +  (maxi-mini)/2
