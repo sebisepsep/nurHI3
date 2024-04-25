@@ -17,7 +17,8 @@ Rewrite in likelihood:
     &= - \sum_j^{N-1} \q{y_i \ln \q{\mu(x_i|a,b,c)}-\mu(x_i|a,b,c)}\\
     &= - \sum_j^{N-1} \q{N_i \ln \q{\Tilde{N}_i(x_i|a,b,c)}-\Tilde{N}_i(x_i|a,b,c)}
 \end{align}
-In our case $\lambda = \mu = \Tilde{N}_i$ for the model counts. and $N_i$ for the mean observed counts in each bin. 
+In our case, $\lambda = \mu = \widetilde{N}_i$ for the model counts, and $N_i$ for the mean observed counts in each bin.
+What you can see here is that some functions align quite well, disregarding the amplitude. However, it also happened that the golden ratio search became stuck. What is different in this code is that I removed the condition to tighten the bracket for the golden ratio search once a value repeats. Apparently, this works better in this case. But still, it feels more like an educated guess than that it works properly in a lot of cases. Again, it depends on the accuracies and initial brackets and initial points
 
 \begin{figure}[h!]
     \centering
