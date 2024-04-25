@@ -1,0 +1,60 @@
+Now we take the correct unbiased approach. \\
+The poisson distribution is given by:
+\begin{align}
+    P_\lambda (k) = \frac{\lambda^k \cdot \exp(-\lambda)}{k!}
+\end{align}
+
+\begin{align}
+    \log(P_\lambda (k)) = k \log(\lambda) -\lambda -\log(k!)
+\end{align}
+
+\begin{align}
+    \log(P_\lambda (k)) = k \log(\lambda) -\lambda - \sum_{i=0}^{k-1} \log(k-i)
+\end{align}
+Rewrite in likelihood:
+\begin{align}
+    - \ln \mathcal{L} &= - \sum_j^{N-1} \q{y_i \ln \q{\mu(x_i|a,b,c)}-\mu(x_i|a,b,c)- \ln \q{y_i!}} \quad \text{the last term is const}\\
+    &= - \sum_j^{N-1} \q{y_i \ln \q{\mu(x_i|a,b,c)}-\mu(x_i|a,b,c)}\\
+    &= - \sum_j^{N-1} \q{N_i \ln \q{\Tilde{N}_i(x_i|a,b,c)}-\Tilde{N}_i(x_i|a,b,c)}
+\end{align}
+In our case $\lambda = \mu = \Tilde{N}_i$ for the model counts. and $N_i$ for the mean observed counts in each bin. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{dataset_1_plotc.jpg}
+    \caption{Caption for dataset 1}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{dataset_2_plotc.jpg}
+    \caption{Caption for dataset 2}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{dataset_3_plotc.jpg}
+    \caption{Caption for dataset 3}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{dataset_4_plotc.jpg}
+    \caption{Caption for dataset 4}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{dataset_5_plotc.jpg}
+    \caption{Caption for dataset 5}
+\end{figure}
+
+
+
+
+\lstinputlisting{dataset_0_paramsc.txt}
+\lstinputlisting{dataset_1_paramsc.txt}
+\lstinputlisting{dataset_2_paramsc.txt}
+\lstinputlisting{dataset_3_paramsc.txt}
+\lstinputlisting{dataset_4_paramsc.txt}
+\lstinputlisting{c.py}

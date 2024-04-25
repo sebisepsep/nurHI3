@@ -1,0 +1,70 @@
+Each dataset contains the number and position of satellite galaxies and the number of halos.\\
+Step 1:\\
+\begin{itemize}
+    \item number of radial bins: 75
+    \item space: real
+    \item range: per iteration max(r)
+\end{itemize}
+Step 2: \\
+Calculate the mean number of galaxies per halo per dataset:
+\begin{align}
+    \langle N_{sat} \rangle = \frac{\# Galaxies}{\# Halos}
+\end{align}
+Bin the satellite galaxy radii to get a mean number of satellites:
+\begin{align}
+    N[i] &= \# Galaxies \in [x_i,x_{i+1}]\\
+    N &= \frac{N}{\# Halos}
+\end{align}
+These are our datapoints. \\
+Now we want to minimize a $\chi^2$:
+\begin{align}
+    \chi^2 &= \sum_i \frac{\q{N_i-\text{Model}_i(a,b,c)}^2}{\sigma_i^2}\\
+    \chi^2 &= \sum_i \frac{\q{N_i-\Tilde{N}_i(a,b,c)}^2}{\Tilde{N}_i(a,b,c)_i^2}
+\end{align}
+Where:
+\begin{align}
+    \Tilde{N}_i(a,b,c) &= 4 \pi \int_{x_i}^{x_{i+1}}n(x,a,b,c)x^2dx \\
+    &= 4 \pi A(a,b,c)\cdot \langle N_{sat} \rangle \f{1}{b}^{a-3}  \int_{x_i}^{x_{i+1}}x^{a-1} \exp\q{-\f{x}{b}^{c}} dx
+\end{align}
+With:
+\begin{align}
+    n(a,b,c,x) &= A(a,b,c)\cdot \langle N_{sat} \rangle \f{x}{b}^{a-3} \exp\q{-\f{x}{b}^{c}}\\
+    A(a,b,c) &= \q{4\pi \f{1}{b}^{a-3} \int_0^{x_{max}} x^{a-1} \exp\q{-\f{x}{b}^c} dx}^{-1}
+\end{align}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{dataset_1_plotb.jpg}
+    \caption{Caption for dataset 1}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{dataset_2_plotb.jpg}
+    \caption{Caption for dataset 2}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{dataset_3_plotb.jpg}
+    \caption{Caption for dataset 3}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{dataset_4_plotb.jpg}
+    \caption{Caption for dataset 4}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{dataset_5_plotb.jpg}
+    \caption{Caption for dataset 5}
+\end{figure}
+
+\lstinputlisting{dataset_0_paramsb.txt}
+\lstinputlisting{dataset_1_paramsb.txt}
+\lstinputlisting{dataset_2_paramsb.txt}
+\lstinputlisting{dataset_3_paramsb.txt}
+\lstinputlisting{dataset_4_paramsb.txt}
+\lstinputlisting{b_ref.py}

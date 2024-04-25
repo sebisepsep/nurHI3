@@ -1,0 +1,17 @@
+The G faktor is given by:
+\begin{align}
+    G = 2\sum_i N_i \ln \q{\frac{N_i}{\Tilde{N_i}}}
+\end{align}
+And the Q Faktor by:
+\begin{align}
+    Q = 1-P(x,k) = 1 -P(\chi^2 \leq x) = P(\chi^2>x) 
+\end{align}
+
+With:
+\begin{align}
+    k &= N-m \quad \text{binned datapoints - parameter}\\
+    P(x,k) &= \frac{\gamma\q{\frac{k}{2},\frac{x}{2}}}{\Gamma\q{\frac{k}{2}}} = \int_0^{\chi^2} p(x,k) =  \q{2^{k/2}\Gamma\f{k}{2}}^{-1} \int_0^{\chi^2} x^{k/2-1}e^{-x/2}
+\end{align}
+
+Each dataset has k = 75 - 3, because we are binning data and want to fit a funktion depending on 3 variables to it.  
+The G-test compares observed frequency distribution with an expected one, aiming to minimize information loss when approximating true distribution. Comparing Q-values between maximum likelihood and chi-square methods gauges their goodness of fit. A Q-value near 1 indicates both methods offer satisfactory fit. A markedly smaller Q-value for one method suggests its superior fit, better for modeling the data. Significant differences in Q-values indicate disparities in capturing underlying data patterns, warranting further investigation. If Q-values are similar but not near 1 for both methods, alternative models or methods may be needed for better representation.
