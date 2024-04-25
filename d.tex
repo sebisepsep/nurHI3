@@ -15,3 +15,5 @@ With:
 
 Each dataset has k = 75 - 3, because we are binning data and want to fit a funktion depending on 3 variables to it.  
 The G-test compares observed frequency distribution with an expected one, aiming to minimize information loss when approximating true distribution. Comparing Q-values between maximum likelihood and chi-square methods gauges their goodness of fit. A Q-value near 1 indicates both methods offer satisfactory fit. A markedly smaller Q-value for one method suggests its superior fit, better for modeling the data. Significant differences in Q-values indicate disparities in capturing underlying data patterns, warranting further investigation. If Q-values are similar but not near 1 for both methods, alternative models or methods may be needed for better representation.
+
+Unfortunately the previous tasks didn't go as planned, so I couldn't to this task. Another problem was also that some $N_i$ were zero and the logarithm of zero "is" minus inifinity. So this didn't work. A possibility would have been to lower the amounts of bins. This would effect our k value since we have less datapoints in this sense. 
