@@ -5,6 +5,7 @@ Step 1:\\
     \item space: real
     \item range: per iteration max(r)
 \end{itemize}
+I have choosen 75 bins for every plot, because I saw the number of galaxies for every dataset and wanted that also the lowest has also a representative amout of bins. The maximal value changes for every dataset to avoid a lot of empty bins. And since there was the opportunity to use real spacing, I used it, because I personally find this more intuitive. Or on the other side I haven't seen the advantage of a log spacing. 
 Step 2: \\
 Calculate the mean number of galaxies per halo per dataset:
 \begin{align}
@@ -32,34 +33,31 @@ With:
     A(a,b,c) &= \q{4\pi \f{1}{b}^{a-3} \int_0^{x_{max}} x^{a-1} \exp\q{-\f{x}{b}^c} dx}^{-1}
 \end{align}
 
+In the figures we can see the best fit data of the chi squared fit and the binned data. In this tasked we used a combination of the conjugated gradient method and the golden ratio search. What is obvious that none of the fits fit the data well. Also from the golden ratio search we saw that we are not really chaning the initial parameters in this configuration. In the worst case we ended with a not changing value in the golden ratio search. TO prevent this we added a part that thightens the brachet so that we might get closer to the minimum of the linear minimization. Unfortunately the values didn't changed so that this fit is a valid approximation of the data. Everytime when the title of a figure says "error in golden ratio" it means that this method was stuck and therefore the result return value was the same as before and our check value was zero. The best fit data is therefore here completly dominated by the initial values. I also tried many initial parameters and it was also possible that the plots would more align, but still this was only related to the initial setting. On the other hand I tried this algorithm with many functions depenting on 3 values and minimized it and so far this always worked. So there might also be another mistake in the chi squared formula. I'm aware that the plots should be log-log, but since I have choosen a real spacing it will only mess up the whole diagramm.
+
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.8\textwidth]{dataset_1_plotb.jpg}
-    \caption{Caption for dataset 1}
 \end{figure}
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.8\textwidth]{dataset_2_plotb.jpg}
-    \caption{Caption for dataset 2}
 \end{figure}
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.8\textwidth]{dataset_3_plotb.jpg}
-    \caption{Caption for dataset 3}
 \end{figure}
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.8\textwidth]{dataset_4_plotb.jpg}
-    \caption{Caption for dataset 4}
 \end{figure}
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.8\textwidth]{dataset_5_plotb.jpg}
-    \caption{Caption for dataset 5}
 \end{figure}
 
 \lstinputlisting{dataset_0_paramsb.txt}
