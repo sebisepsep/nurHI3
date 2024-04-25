@@ -1,14 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
-
-
-
-
-
 #write maximazation algorithm
-#golden section search:
-# start with a,b,c three points in interval:
+
 
 def golden(f,mini,mid,maxi,acc):
     while True: 
@@ -49,24 +42,26 @@ def golden(f,mini,mid,maxi,acc):
 
         #step 4
         #tighten towads b
-        if f(d) > f(mid): #wrde sich ein else nur auf das letzte if beziehnen?
+        if f(d) > f(mid): 
             if mid < d < maxi:
                 maxi = d
 
             else:
                 mini = d
     return value
-    #tighten related to the previous step - makes only sense if 4 right? not step3?
 
 
 
 def main():
+    #given parameters
     a, b, c, x_max, Nsat, A = 2.4, 0.25, 1.6, 5, 100, 256/(5*np.pi**(3/2))
+    #given function
     def N(x): 
         return -4*np.pi*A*Nsat*x**(a-1)*(1/b)**(a-3)*np.exp(-(x/b)**c) 
     mini,mid,maxi = 0,2,5
     acc = 10**-6
     xx = golden(N,mini,mid,maxi,acc)
+    #saving data
     with open("1a.txt", 'w') as file:
         file.write(f"The minimum is at x={xx},N(x) = {-N(xx)}")
         
