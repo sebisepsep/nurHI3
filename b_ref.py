@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+#import datasets
 def readfile(filename):
     f = open(filename, 'r')
     data = f.readlines()[3:] #Skip first 3 lines 
@@ -28,7 +29,7 @@ def trap(func,low,high,N): #a=mini, b = maxi
     result = result*h
     return result 
 
-#romberg integration
+#romberg integration - from the assignment before
 def romberg(func, low, high, m): #a=mini, b = maxi
     h = high - low
     r = np.zeros(m)
@@ -80,30 +81,27 @@ def golden(f,mini,mid,maxi,acc):
             larger_interval = (mini, mid)
             x = mini
         
-        #also for later!
+        #also for later! - to check whether this loop is stuck
         x_array[count%3] = x
         if (x_array[0]==x_array[1]) and (x_array[0]==x_array[2]):
-            #print("error in golden")
             value = x
             break
-        #print(x_array)
         
         
         w = 0.38197 #golden ratio
         d = mid + (x-mid)*w
         
-        print(abs(maxi - mini))
         # step 2
         if abs(maxi - mini) < acc:
             if f(d) < f(mid):
-                print(f"d it is!. d = {d}")
+                #print(f"d it is!. d = {d}")
                 #print("a",mini)
                 #print("b",mid)
                 #print("c",maxi)
                 value = d
                 break
             else: 
-                print(f"b it is!. b = {mid}")
+                #print(f"b it is!. b = {mid}")
                 #print("a",mini)
                 #print("c",maxi)
                 #print("d",d)
@@ -113,7 +111,7 @@ def golden(f,mini,mid,maxi,acc):
         # step 3
         #tighten towards d
         if f(d) < f(mid): 
-            if mid < d < maxi: #b and c must be ordered :)
+            if mid < d < maxi: 
                 mini,mid = mid,d
 
             else:
@@ -130,26 +128,30 @@ def golden(f,mini,mid,maxi,acc):
         count += 1
     return value
 
+#define absolute value of a vector
 def ab(vec):
     return np.sqrt(sum(vec**2))
 
+#scalar product of a vector
 def scalar(vec1,vec2):
     return sum(vec1*vec2)
 
+#gradient of a scalar field 
 def gradient(function,vec): # vec_x = x,y,z
     x,y,z = vec[0],vec[1],vec[2]
     array = np.zeros(3)
     h = 0.0001 #might causes issues for x,y or z <<h 
-    #central
+    #central method 
     array[0] = (function(x+h,y,z)-function(x-h,y,z))/2/h
     array[1] = (function(x,y+h,z)-function(x,y-h,z))/2/h
     array[2] = (function(x,y,z+h)-function(x,y,z-h))/2/h
     return array
 
+#for linear minimization
 def opti(lam): 
-    #in our case it should be chi^2!
-    return chi2_eq(x_glob+lam*n_glob[i][0],y_glob+lam*n_glob[i][1],z_glob+lam*n_glob[i][2])
+    return chi2_eq(x_glob+lam*n_glob[i][0],y_glob+lam*n_glob[i][1],z_glob+lam*n_glob[i][2]) #given calculated values 
 
+#calculate A for a new set of a,b,c
 def A_value(a,b,c,x_max):
     if (a < 1) or (c < 0):
         print("Warning") #important for minimization for specific case!
@@ -163,6 +165,7 @@ def A_value(a,b,c,x_max):
     k = 4*np.pi*(1/b)**(a-3)*romberg(integrad_a,mini,maxi,m)
     return 1/k # returns A
 
+#chi^2 function
 def chi2_eq(a,b,c):
     #N_array is given
     """x_max_glob"""
@@ -203,6 +206,7 @@ if __name__ == "__main__":
     max_x_array = np.array([max(x) for x in r_array])
     n_sat_array = n_sat_c_array/halo_array
 
+    #the conjugated gradient method for the different datasets
     for j in range(5):
         x_max_glob = max_x_array[j]
         n_sat_glob = n_sat_array[j]
@@ -226,14 +230,13 @@ if __name__ == "__main__":
             #number of galaxies in bin
             N_array[i] = sum(r_glob* (bins[i] < r_glob)*(r_glob < bins[i+1]))  #returns True/False = 1/0
         
-        """might divide by width"""
         #mean number of galaxy per bin per halo
         N_array = N_array/halo_glob 
             
         np.save(f"n_array{j}.npy",N_array)
-        
+
+        #start of the actual method
         maxi = 0.01
-        
         i = 0
         while True:
             x_glob, y_glob, z_glob = initial[0],initial[1],initial[2]
@@ -264,7 +267,8 @@ if __name__ == "__main__":
 
 
             #now do line minimization to find lambda for new x point via golden ratio search
-            mini = 0 #because of graddient I would guess itstarts at zero!
+            mini = 0 
+            #to reduce mistakes by golden ratio search
             if i>2:
                 lam_min_nacher = lam_track[i-1]
                 lam_min_vorher = lam_track[i-2]
@@ -272,8 +276,7 @@ if __name__ == "__main__":
                 if lam_min_vorher == lam_min_nacher:
                     maxi = maxi/2
             
-            
-            """    maxi = 10 #guess - depends on order of n!"""
+
             mid = mini +  (maxi-mini)/2
 
             #provide me with the minimum
