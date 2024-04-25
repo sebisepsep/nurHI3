@@ -2,6 +2,8 @@ from b_ref import romberg, trap, golden, ab, scalar, gradient, A_value
 import numpy as np 
 import matplotlib.pyplot as plt
 
+#everything basically as in b) just another function to minimize
+
 r1, nhalo1 = np.load("radius1.npy"), np.load("nhalo1.npy")
 r2, nhalo2 = np.load("radius2.npy"), np.load("nhalo2.npy")
 r3, nhalo3 = np.load("radius3.npy"), np.load("nhalo3.npy")
@@ -93,8 +95,7 @@ for j in range(5):
             if lam_min_vorher == lam_min_nacher:
                 maxi = maxi/2
         
-        
-        """    maxi = 10 #guess - depends on order of n!"""
+    
         mid = mini +  (maxi-mini)/2
 
         #provide me with the minimum
